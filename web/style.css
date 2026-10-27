@@ -15,3 +15,25 @@
 .qa-body{padding:0 0 16px}
 .qa-body p{font-size:17px}
 @media(max-width:760px){.article-head h1{font-size:28px}.article-grid{padding-top:30px}.article-grid h2{font-size:22px}.article-grid h3{font-size:18px}.article-grid aside{padding-top:26px}}
+
+/* Public reading index and article navigation. */
+.site-label{font-size:13px;color:var(--muted);text-decoration:none}
+.site-label:hover{text-decoration:underline}
+.skip-link{position:absolute;left:16px;top:-80px;padding:8px 14px;background:white;border:1px solid var(--ink);z-index:10}
+.skip-link:focus{top:16px}
+.hero{padding:48px 0 26px}
+.hero h1{font-size:42px;letter-spacing:0;margin:16px 0 12px}
+.cards{grid-template-columns:1fr;gap:0}
+.paper{border:0;border-top:1px solid var(--line);border-radius:0;padding:25px 0}
+.paper:last-child{border-bottom:1px solid var(--line)}
+.paper:hover{transform:none}
+.paper h2{margin:12px 0;font-size:26px}
+.paper p{font-size:16px;margin-bottom:16px;max-width:850px}
+.contents{margin:22px 0 30px;border:1px solid var(--line);padding:12px 18px;font-size:16px}
+.contents summary{cursor:pointer}
+.contents ol{padding-left:24px;margin-bottom:4px}
+.contents a{text-decoration:none}
+.contents a:hover{text-decoration:underline}
+.article-grid h3{scroll-margin-top:24px}
+#result-count{font-variant-numeric:tabular-nums}
+@media(max-width:760px){.hero h1{font-size:34px}.hero{padding-top:34px}.paper h2{font-size:23px}.brand{letter-spacing:1px}.top{gap:12px}}

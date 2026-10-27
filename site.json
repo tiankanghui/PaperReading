@@ -1,5 +1,7 @@
 {
-  "title": "Paper Reading",
-  "subtitle": "记录论文，也记录理解发生的过程。",
-  "author": "我的论文阅读笔记"
+  "title": "论文阅读笔记",
+  "subtitle": "整理论文的方法、证据与关键问题。",
+  "author": "tiankanghui",
+  "url": "https://tiankanghui.github.io/PaperReading/",
+  "repository": "https://github.com/tiankanghui/PaperReading"
 }

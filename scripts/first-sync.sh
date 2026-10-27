@@ -25,4 +25,4 @@ if ! git diff --cached --quiet; then
     commit -m "Add private paper reading journal"
 fi
 git push -u origin main
-echo '首次同步成功。笔记保存在私有仓库，公开网页部署未启用。'
+echo '首次同步成功。后续更新请使用 sh scripts/publish.sh。'
