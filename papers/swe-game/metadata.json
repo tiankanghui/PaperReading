@@ -1,0 +1,16 @@
+{
+  "title": "SWE-Game: Can Coding Agents Build the Games We Want?",
+  "authors": "Xiaoyu Chen, Lai Wei, Jin Wang, Xiangyu Zou, Ruochen Fan, Enze Luo, Mingzhe Yao, Jiahui Zhu, Yuhua Wen, Linghe Kong, Weiran Huang",
+  "year": 2026,
+  "date": "2026-10-27",
+  "status": "在读",
+  "tags": [
+    "Coding Agent",
+    "游戏开发",
+    "Benchmark",
+    "运行时评测"
+  ],
+  "summary": "游戏能跑起来，玩法就做对了吗？从五类开发任务、运行时 judge 与视觉评分，理解 SWE-Game 如何评估游戏 Agent，以及需求覆盖和状态逻辑为何重要。",
+  "url": "https://arxiv.org/abs/2609.33678v3",
+  "venue": "arXiv 预印本 · v3 · 2026-10-07"
+}

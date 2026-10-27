@@ -95,6 +95,19 @@ def shell(title, body, prefix=''):
 <footer>把疑问留下，把理解写清楚。<span>以原文为依据 · 持续修订</span></footer></div><script src="{prefix}app.js"></script></body></html>'''.format(title=esc(title), body=body, prefix=prefix)
 
 
+def discussion_html(source):
+    rendered = markdown(source)
+    headings = list(re.finditer(r'<h3>(.*?)</h3>', rendered))
+    if not headings:
+        return rendered
+    output = [rendered[:headings[0].start()]]
+    for i, heading in enumerate(headings):
+        end = headings[i + 1].start() if i + 1 < len(headings) else len(rendered)
+        output.append('<details class="qa"><summary>{}</summary><div class="qa-body">{}</div></details>'.format(
+            heading[1], rendered[heading.end():end]))
+    return '\n'.join(output)
+
+
 def build():
     config = json.loads((ROOT / 'site.json').read_text())
     papers = []
@@ -124,8 +137,8 @@ def build():
         source = safe_url(p.get('url', ''))
         source_link = '<a class="source" href="{}" target="_blank" rel="noopener noreferrer">论文原文 ↗</a>'.format(esc(source)) if source else ''
         body = '''<main><a class="back" href="../index.html">← 所有阅读</a><div class="article-head"><div class="eyebrow">{date} / {status}</div><h1>{title}</h1><p class="authors">{authors} · {year} · {venue}</p><p class="abstract">{summary}</p><div class="article-links">{tags}{source_link}</div></div>
-<nav class="tabs" aria-label="笔记类型"><a href="#notes">阅读笔记</a><a href="#discussion">关键问答</a></nav>
-<div class="article-grid"><article id="notes"><div class="section-label">01 / READING NOTES</div>{notes}</article><aside id="discussion"><div class="section-label">02 / CONVERSATION</div>{discussion}</aside></div></main>'''.format(date=esc(p['date']), status=esc(p['status']), title=esc(p['title']), authors=esc(p.get('authors') or '作者待补充'), year=esc(p.get('year', '')), venue=esc(p.get('venue', '')), summary=esc(p['summary']), tags=tags, source_link=source_link, notes=markdown((directory / 'notes.md').read_text()), discussion=markdown((directory / 'discussion.md').read_text()))
+<nav class="tabs" aria-label="笔记类型"><a href="#notes">阅读笔记</a><a href="#discussion">问题与关键点</a></nav>
+<div class="article-grid"><article id="notes"><div class="section-label">01 / READING NOTES</div>{notes}</article><aside id="discussion"><div class="section-label">02 / KEY POINTS</div>{discussion}</aside></div></main>'''.format(date=esc(p['date']), status=esc(p['status']), title=esc(p['title']), authors=esc(p.get('authors') or '作者待补充'), year=esc(p.get('year', '')), venue=esc(p.get('venue', '')), summary=esc(p['summary']), tags=tags, source_link=source_link, notes=markdown((directory / 'notes.md').read_text()), discussion=discussion_html((directory / 'discussion.md').read_text()))
         (OUT / 'papers').mkdir(exist_ok=True)
         (OUT / 'papers' / (directory.name + '.html')).write_text(shell(p['title'], body, '../'))
 
@@ -133,11 +146,11 @@ def build():
         return ''.join('<option value="{0}">{0}</option>'.format(esc(v)) for v in sorted(set(values)))
 
     real = [p for _, p in papers if p['status'] != '示例']
-    body = '''<main><section class="hero"><div class="eyebrow">A PERSONAL RESEARCH JOURNAL</div><h1>读过，问过，<br><em>慢慢想明白。</em></h1><p>{subtitle}</p><div class="hero-stats"><span><b>{count:02d}</b> 篇阅读</span><span><b>{topics:02d}</b> 个主题</span><span class="hero-note">论文笔记 / 关键问答 / 理解修正</span></div></section>
+    body = '''<main><section class="hero"><div class="eyebrow">A PERSONAL RESEARCH JOURNAL</div><h1>读过，问过，<br><em>慢慢想明白。</em></h1><p>{subtitle}</p><div class="hero-stats"><span><b>{count:02d}</b> 篇阅读</span><span><b>{topics:02d}</b> 个主题</span><span class="hero-note">论文笔记 / 问题与要点 / 阅读启发</span></div></section>
 <section class="library"><div class="library-head"><div><div class="eyebrow">THE READING SHELF</div><h2>我的论文书架</h2></div><span id="result-count">{all_count} 条记录</span></div>
 <div class="filters"><label class="search"><span>⌕</span><input id="search" type="search" placeholder="搜索标题、作者、主题或关键词" aria-label="搜索论文"></label><select id="tag" aria-label="主题"><option value="">所有主题</option>{tag_options}</select><select id="year" aria-label="论文年份"><option value="">所有年份</option>{year_options}</select><select id="status" aria-label="阅读状态"><option value="">所有状态</option>{status_options}</select></div>
 <div class="cards">{cards}</div><div id="empty" class="empty" hidden>还没有匹配的笔记。试试其他关键词，或清空筛选。</div></section>
-<section class="ritual"><span class="section-label">每篇论文，留下一条理解的轨迹</span><p>问题是什么 <span>→</span> 方法如何工作 <span>→</span> 证据是否充分 <span>→</span> 我还有哪些疑问</p></section></main>'''.format(subtitle=esc(config['subtitle']), count=len(real), topics=len(set(t for p in real for t in p['tags'])), all_count=len(papers), tag_options=options(t for _, p in papers for t in p['tags']), year_options=options(str(p['year']) for _, p in papers if p.get('year')), status_options=options(p['status'] for _, p in papers), cards='\n'.join(cards))
+<section class="ritual"><span class="section-label">每篇论文，整理值得记住的问题</span><p>问题是什么 <span>→</span> 方法如何工作 <span>→</span> 证据是否充分 <span>→</span> 我还有哪些疑问</p></section></main>'''.format(subtitle=esc(config['subtitle']), count=len(real), topics=len(set(t for p in real for t in p['tags'])), all_count=len(papers), tag_options=options(t for _, p in papers for t in p['tags']), year_options=options(str(p['year']) for _, p in papers if p.get('year')), status_options=options(p['status'] for _, p in papers), cards='\n'.join(cards))
     (OUT / 'index.html').write_text(shell(config['title'], body))
     (OUT / '.nojekyll').touch()
     print('Built {} records → {}'.format(len(papers), OUT))
