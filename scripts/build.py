@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Build a dependency-free paper-reading website for GitHub Pages."""
 import html
+import hashlib
 import json
 import re
 import shutil
@@ -124,13 +125,15 @@ def shell(title, body, prefix='', description='', page=''):
     repository = safe_url(config.get('repository', ''))
     description = description or config['subtitle']
     body = body.replace('<main>', '<main id="main-content">', 1)
+    css_version = hashlib.sha256((ROOT / 'web/style.css').read_bytes()).hexdigest()[:12]
+    js_version = hashlib.sha256((ROOT / 'web/app.js').read_bytes()).hexdigest()[:12]
     return '''<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title}</title><meta name="description" content="{description}"><meta name="author" content="{author}">
 <link rel="canonical" href="{canonical}"><meta property="og:title" content="{title}"><meta property="og:description" content="{description}"><meta property="og:url" content="{canonical}"><meta property="og:type" content="{ogtype}"><meta property="og:locale" content="zh_CN">
-<link rel="stylesheet" href="{prefix}style.css"></head>
+<link rel="stylesheet" href="{prefix}style.css?v={css_version}"></head>
 <body><a class="skip-link" href="#main-content">跳至正文</a><div class="layout"><header class="top"><a class="brand" href="{prefix}index.html"><span class="mark">P</span> PAPER READING</a><a class="site-label" href="{repository}" target="_blank" rel="noopener noreferrer">GitHub ↗</a></header>{body}
-<footer>以原文为依据 · 持续修订<span>{author} · 论文阅读笔记</span></footer></div><script src="{prefix}app.js"></script></body></html>'''.format(title=esc(title), body=body, prefix=prefix, description=esc(description), author=esc(config['author']), canonical=esc(canonical), repository=esc(repository), ogtype='article' if page.startswith('papers/') else 'website')
+<footer>以原文为依据 · 持续修订<span>{author} · 论文阅读笔记</span></footer></div><script src="{prefix}app.js?v={js_version}"></script></body></html>'''.format(title=esc(title), body=body, prefix=prefix, description=esc(description), author=esc(config['author']), canonical=esc(canonical), repository=esc(repository), ogtype='article' if page.startswith('papers/') else 'website', css_version=css_version, js_version=js_version)
 
 
 def article_html(source, image_prefix=''):
@@ -220,9 +223,9 @@ def build():
         search += ' ' + ' '.join(p.get('affiliations', []) + p.get('insights', []))
         search += ' ' + (directory / 'notes.md').read_text() + ' ' + (directory / 'discussion.md').read_text()
         search = ' '.join(search.split())
-        cover = '<div class="paper-cover"><img src="{}" alt="" loading="lazy" decoding="async"></div>'.format(esc(image_source(p['cover'], 'papers/' + directory.name + '/'))) if p.get('cover') else ''
-        cards.append('''<a class="paper" href="papers/{slug}.html" data-search="{search}" data-status="{status}" data-year="{year}" data-date="{date}" data-tags="{tagdata}">{cover}<div class="paper-card-body">
-<div class="paper-meta"><span>{date} · {venue}</span><span class="status">{status}</span></div><h2>{title}</h2><p>{summary}</p><div class="paper-bottom"><div>{tags}</div><span class="read">阅读笔记 ↗</span></div></div></a>'''.format(slug=directory.name, search=esc(search), status=esc(p['status']), year=esc(p.get('year', '')), tagdata=esc(json.dumps(p['tags'], ensure_ascii=False)), date=esc(p['date']), venue=esc(p.get('venue') or '未填写发表位置'), title=esc(p.get('display_title', p['title'])), summary=esc(p['summary']), tags=tags, cover=cover))
+        cover = '<div class="paper-cover"><img src="{}" alt="" width="240" height="155" loading="lazy" decoding="async"></div>'.format(esc(image_source(p['cover'], 'papers/' + directory.name + '/'))) if p.get('cover') else ''
+        cards.append('''<a class="paper{cover_class}" href="papers/{slug}.html" data-search="{search}" data-status="{status}" data-year="{year}" data-date="{date}" data-tags="{tagdata}">{cover}<div class="paper-card-body">
+<div class="paper-meta"><span>{date} · {venue}</span><span class="status">{status}</span></div><h2>{title}</h2><p>{summary}</p><div class="paper-bottom"><div>{tags}</div><span class="read">阅读笔记 ↗</span></div></div></a>'''.format(slug=directory.name, search=esc(search), status=esc(p['status']), year=esc(p.get('year', '')), tagdata=esc(json.dumps(p['tags'], ensure_ascii=False)), date=esc(p['date']), venue=esc(p.get('venue') or '未填写发表位置'), title=esc(p.get('display_title', p['title'])), summary=esc(p['summary']), tags=tags, cover=cover, cover_class='' if cover else ' no-cover'))
         source = safe_url(p.get('url', ''))
         source_link = '<a class="source" href="{}" target="_blank" rel="noopener noreferrer">论文原文 ↗</a>'.format(esc(source)) if source else ''
         project = safe_url(p.get('project_url', ''))
