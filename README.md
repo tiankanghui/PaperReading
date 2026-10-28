@@ -1,10 +1,12 @@
 # 论文阅读笔记
 
-公开论文博客，整理方法、实验依据与值得继续研究的问题。
+公开论文博客，整理动机、核心 insight、方法、实验依据与值得继续研究的问题。首页支持全文搜索、主题、年份、阅读状态、日期范围和日期排序。文章包含作者单位、版本、核心要点、目录、论文截图与对照表。
 
-- 网站：<https://tiankanghui.github.io/PaperReading/>（完成 GitHub Pages 部署后可访问）
+- 网站：<https://tiankanghui.github.io/PaperReading/>
 - 仓库：<https://github.com/tiankanghui/PaperReading>
 - [SWE-Game 阅读文章](papers/swe-game/notes.md) · [问题与关键点](papers/swe-game/discussion.md)
+- [GameDevBench 阅读文章](papers/gamedevbench/notes.md) · [问题与关键点](papers/gamedevbench/discussion.md)
+- [GameCraft-Bench 阅读文章](papers/gamecraft-bench/notes.md) · [问题与关键点](papers/gamecraft-bench/discussion.md)
 
 ## 首次发布
 
@@ -36,9 +38,10 @@ sh scripts/publish.sh
 
 ```text
 papers/paper-slug/
-  metadata.json   题目、作者、年份、阅读日期、状态、标签、摘要、原文链接
+  metadata.json   题目、作者单位、版本、阅读日期、状态、标签、摘要、insight、原文链接
   notes.md        阅读文章
   discussion.md   文章式问题与关键点
+  images/         论文图表截图，随源文件提交
 ```
 
 目录名使用小写英文、数字、连字符或下划线。日期为 YYYY-MM-DD，状态可为待读、在读、已读、待复现。项目规则在 `AGENTS.md`。
@@ -52,4 +55,8 @@ python3 scripts/check_site.py
 
 直接在浏览器打开 `_site/index.html` 即可，不必启动服务。页面使用白底、黑灰配色，中文优先使用本机楷体，英文使用 Times New Roman；未安装楷体时回退至衬线字体。不加载外部字体、统计服务或脚本。
 
-支持基础 Markdown：标题、段落、粗体、行内代码、链接、无序列表、引用和代码块。暂不提供表格、图片和公式排版，LaTeX 公式保留为文本。
+支持基础 Markdown：标题、段落、粗体、行内代码、链接、无序列表、引用、代码块、管道表格和独立图片。图片可点击打开大图；图注包含来源，图后解释读图要点。LaTeX 公式保留为文本。
+
+文章按 Motivation、Insight、Method、Experiments、结论边界、开放问题组织。metadata 的 `display_title` 用问题式中文标题，`title` 保留原论文题目；`affiliations`、`insights` 为字符串列表，`cover` 为 `images/overview.png` 一类相对路径。阅读日期与论文版本日期分别记录。
+
+论文截图已作为 PNG 保存，构建无需 PDF 工具。需要重新提取时，可选运行 `scripts/extract_figures.py`（需要本地原 PDF、Pillow 与 Poppler）；每张图在文章中标明原论文图表编号和 PDF 页码。

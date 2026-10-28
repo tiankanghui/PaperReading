@@ -25,6 +25,9 @@ git add .gitignore AGENTS.md README.md site.json scripts templates web .github
 for paper_dir in papers/*/; do
   if [ -f "${paper_dir}metadata.json" ]; then
     git add "${paper_dir}metadata.json" "${paper_dir}notes.md" "${paper_dir}discussion.md"
+    if [ -d "${paper_dir}images" ]; then
+      find "${paper_dir}images" -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) -exec git add -- '{}' +
+    fi
   fi
 done
 if ! git diff --cached --quiet; then

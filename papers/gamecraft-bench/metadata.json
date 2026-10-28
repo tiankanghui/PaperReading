@@ -1,0 +1,35 @@
+{
+  "title": "GameCraft-Bench: Can Agents Build Playable Games End-to-End in a Real Game Engine?",
+  "authors": "Tongxu Luo, Rongsheng Wang, Jiaxi Bi, Chenming Xu, Zhengyang Tang, Jianlong Chen, Juhao Liang, Ke Ji, Shuqi Guo, Yuhao Du, Fan Bu, Wenyu Du, Xiaotong Zhang, Kyle Li, Shaobo Wang, Linfeng Zhang, Yuxuan Liu, Xin Lai, Chenxin Li, Yiduo Guo, Zhexin Zhang, Xinyuan Wang, Tianyi Bai, Ziniu Li, Benyou Wang",
+  "year": 2026,
+  "date": "2026-10-28",
+  "status": "在读",
+  "tags": [
+    "Coding Agent",
+    "游戏开发",
+    "Benchmark",
+    "端到端生成"
+  ],
+  "summary": "140 个 Godot 游戏生成任务，将完整项目交付、交互回放和多模态 rubric 评分结合起来，考察 Agent 从需求到可玩游戏的端到端能力。",
+  "url": "https://arxiv.org/abs/2606.17861v1",
+  "venue": "arXiv 预印本",
+  "display_title": "GameCraft-Bench：从能运行到完整可玩",
+  "affiliations": [
+    "The Chinese University of Hong Kong, Shenzhen",
+    "Shenzhen Loop Area Institute",
+    "Hunyuan Team, Tencent",
+    "USTB",
+    "DualverseAI",
+    "SJTU",
+    "NUS"
+  ],
+  "version": "arXiv v1",
+  "paper_date": "2026-06-16",
+  "project_url": "https://tongxuluo.github.io/gamecraft-bench-website",
+  "insights": [
+    "评测完整游戏需要同时约束开发环境、交付物和实际交互证据。",
+    "能启动、能回放只是准入条件；内容、视觉反馈和呈现质量仍需单独评价。",
+    "交互回放提供真实运行证据，但质量判分主要由隐藏 rubric 和多模态 judge 完成。"
+  ],
+  "cover": "images/overview.png"
+}

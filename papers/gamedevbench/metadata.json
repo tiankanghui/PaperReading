@@ -1,0 +1,30 @@
+{
+  "title": "GameDevBench: Evaluating Agentic Capabilities Through Game Development",
+  "authors": "Wayne Chi, Yixiong Fang, Arnav Yayavaram, Siddharth Yayavaram, Seth Karten, Qiuhong Anna Wei, Runkun Chen, Alexander Wang, Valerie Chen, Ameet Talwalkar, Chris Donahue",
+  "year": 2026,
+  "date": "2026-10-28",
+  "status": "在读",
+  "tags": [
+    "Coding Agent",
+    "游戏开发",
+    "Benchmark",
+    "多模态"
+  ],
+  "summary": "333 个教程衍生的 Godot 开发任务，用引擎内测试验证局部修改，并研究编辑器截图与运行视频如何帮助 Agent 理解多模态项目。",
+  "url": "https://arxiv.org/abs/2602.11103v2",
+  "venue": "ICML 2026",
+  "display_title": "GameDevBench：看懂素材，才能写对游戏",
+  "affiliations": [
+    "Carnegie Mellon University（CMU）",
+    "Princeton University"
+  ],
+  "version": "arXiv v2",
+  "paper_date": "2026-06-30",
+  "project_url": "https://github.com/waynchi/gamedevbench",
+  "insights": [
+    "多模态解题与确定性判分可以分开：Agent 需要看懂素材，judge 可以直接检查引擎行为。",
+    "局部开发也需要跨文件集成；动画、场景、资源和信号必须共同工作。",
+    "截图和运行视频可成为开发反馈，但收益随模型和 Agent 框架而变化。"
+  ],
+  "cover": "images/overview.png"
+}
