@@ -4,20 +4,31 @@
   "year": 2026,
   "date": "2026-10-28",
   "status": "已读",
-  "tags": ["Computer-Use Agent", "RLVR", "数据合成", "环境生成", "奖励验证"],
-  "summary": "联合生成指令、可复现环境和程序化奖励，以双环境校验、脚本信息隔离及真实 rollout 筛选构建 CUA 训练任务。重点拆解功能树与覆盖矩阵、初始/目标状态构造、增量判分、mock 状态 API，以及实验和验证的边界。",
+  "tags": [
+    "Computer-Use Agent",
+    "RLVR",
+    "数据合成",
+    "环境生成",
+    "奖励验证"
+  ],
+  "summary": "怎样准备一道能反复练习、自动判分的电脑操作题？从给客户发邮件的例子出发，逐步解释任务材料、两台测试电脑、独立判分和真实操作筛选，再说明训练网站如何复用，以及实验支持哪些结论。",
   "url": "https://arxiv.org/abs/2605.25624v2",
   "venue": "arXiv 预印本",
   "display_title": "CUA-Gym：如何造出可训练、可判分的电脑操作任务？",
-  "affiliations": ["The University of Hong Kong", "Qwen Team, Alibaba Inc.", "University of California, San Diego", "Tsinghua University"],
+  "affiliations": [
+    "The University of Hong Kong",
+    "Qwen Team, Alibaba Inc.",
+    "University of California, San Diego",
+    "Tsinghua University"
+  ],
   "version": "arXiv v2",
   "paper_date": "2026-06-08",
   "project_url": "https://cua-gym.xlang.ai",
   "insights": [
-    "数据单元是指令、可执行初始环境和奖励函数组成的任务包，教师轨迹是其后生成的训练材料。",
-    "判分 Agent 看不到生成脚本，但能查看两端状态；隔离减少对构造过程的依赖，不构成奖励正确性的形式化证明。",
-    "初始得 0、目标得 1 只验证两个端点；审查与真实 rollout 才补查歧义、可解性及奖励与实际完成情况的偏离。",
-    "状态注入、会话隔离和结构化 diff 让一个 mock 支持多任务与并发训练；环境多样性消融的直接证据来自 SFT。"
+    "一道训练题要同时有要做的事、操作前的电脑环境和判分程序；成功操作的示范记录在做题后才产生。",
+    "先准备“尚未做任务”和“正确完成后”的两台电脑，再用它们测试判分程序。",
+    "写判分的 Agent 能看两台电脑的结果，但不能看准备它们的脚本；测试得 0 和 1 仍不能保证所有错误结果都会被拒绝。",
+    "还要让 Agent 通过界面真正尝试；同一个训练网站可以更换材料、重新开始，并隔开不同 Agent 的操作。"
   ],
   "cover": "images/overview.png"
 }
