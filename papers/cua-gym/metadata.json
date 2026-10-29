@@ -1,0 +1,23 @@
+{
+  "title": "CUA-GYM: Scaling Verifiable Training Environments and Tasks for Computer-Use Agents",
+  "authors": "Bowen Wang, Dunjie Lu, Junli Wang, Tianyi Bai, Shixuan Liu, Zhipeng Zhang, Haiquan Wang, Hao Hu, Tianbao Xie, Shuai Bai, Dayiheng Liu, Que Shen, Junyang Lin, Tao Yu",
+  "year": 2026,
+  "date": "2026-10-28",
+  "status": "已读",
+  "tags": ["Computer-Use Agent", "RLVR", "数据合成", "环境生成", "奖励验证"],
+  "summary": "联合生成指令、可复现环境和程序化奖励，以双环境校验、脚本信息隔离及真实 rollout 筛选构建 CUA 训练任务。重点拆解功能树与覆盖矩阵、初始/目标状态构造、增量判分、mock 状态 API，以及实验和验证的边界。",
+  "url": "https://arxiv.org/abs/2605.25624v2",
+  "venue": "arXiv 预印本",
+  "display_title": "CUA-Gym：如何造出可训练、可判分的电脑操作任务？",
+  "affiliations": ["The University of Hong Kong", "Qwen Team, Alibaba Inc.", "University of California, San Diego", "Tsinghua University"],
+  "version": "arXiv v2",
+  "paper_date": "2026-06-08",
+  "project_url": "https://cua-gym.xlang.ai",
+  "insights": [
+    "数据单元是指令、可执行初始环境和奖励函数组成的任务包，教师轨迹是其后生成的训练材料。",
+    "判分 Agent 看不到生成脚本，但能查看两端状态；隔离减少对构造过程的依赖，不构成奖励正确性的形式化证明。",
+    "初始得 0、目标得 1 只验证两个端点；审查与真实 rollout 才补查歧义、可解性及奖励与实际完成情况的偏离。",
+    "状态注入、会话隔离和结构化 diff 让一个 mock 支持多任务与并发训练；环境多样性消融的直接证据来自 SFT。"
+  ],
+  "cover": "images/overview.png"
+}

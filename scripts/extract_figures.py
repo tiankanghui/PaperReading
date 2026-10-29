@@ -13,6 +13,10 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 FIGURES = [
+    ('cua-gym', 'cua-gym.pdf', 3, 'overview', (0.11, 0.08, 0.89, 0.39)),
+    ('cua-gym', 'cua-gym.pdf', 4, 'environment-pipeline', (0.11, 0.08, 0.89, 0.325)),
+    ('cua-gym', 'cua-gym.pdf', 8, 'data-scaling', (0.11, 0.08, 0.89, 0.36)),
+    ('cua-gym', 'cua-gym.pdf', 8, 'environment-scaling', (0.51, 0.50, 0.90, 0.79)),
     ('gamedevbench', 'gamedevbench.pdf', 2, 'overview', (0.09, 0.08, 0.91, 0.425)),
     ('gamedevbench', 'gamedevbench.pdf', 7, 'results', (0.09, 0.07, 0.91, 0.59)),
     ('gamecraft-bench', 'gamecraft-bench.pdf', 6, 'overview', (0.10, 0.51, 0.90, 0.86)),

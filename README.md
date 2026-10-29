@@ -7,6 +7,7 @@
 - [SWE-Game 阅读文章](papers/swe-game/notes.md) · [问题与关键点](papers/swe-game/discussion.md)
 - [GameDevBench 阅读文章](papers/gamedevbench/notes.md) · [问题与关键点](papers/gamedevbench/discussion.md)
 - [GameCraft-Bench 阅读文章](papers/gamecraft-bench/notes.md) · [问题与关键点](papers/gamecraft-bench/discussion.md)
+- [CUA-Gym 阅读文章](papers/cua-gym/notes.md) · [问题与关键点](papers/cua-gym/discussion.md)
 
 ## 首次发布
 
